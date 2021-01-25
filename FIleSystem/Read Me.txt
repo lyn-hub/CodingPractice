@@ -1,0 +1,73 @@
+Design an in - memory file system:
+
+Main functionalites:
+1. Files, directories
+2. metadata of files / directories: name, creation time, access time, etc.
+3. operation: create, delete count file, etc.
+
+The file system is tree - like:
+e.g                           Dir
+                        /   /   \    \
+                       Dir File File Dir
+                     /    \
+                   Dir    File
+
+Class:
+Because File and Directory have same metadata, and some same basic operations. So we can create a abstract class:
+Entry. File & Directory class will extend the Entry class.
+
+File vs Directory:
+
+1. File like the leaf node, cannot have child any more.  Directory can have subdirectories and subfiles.
+2. File have String content. Directory doesn't have the String property.
+3. They all contains the same metadata properties.
+
+
+Entry: 
+     Fileds: metadata:  protected Directory parent;
+	       		protected long created;
+			protected long lastUpdated;
+			protected long LastAccessed;
+			protected String name;
+     Methods: constructor;
+              boolean delete();
+              abstract int size();
+              String getFullPath();
+              long getCreationTime();
+              long getLastUpdatedTime();
+              getLastAccessedTime();
+              changeName(String n);
+              getName();
+
+File extends Entry:
+     Fields: private String content;
+	     private int size;
+     Methods: constructor;
+	      int size();
+              String getContents();
+              setContents(String c);
+
+Directory extends Entry:
+     Fields: private List<Entry> contents;
+     Methods: constructor;
+              List<Entry> getContents();
+              int size();
+              int numberOfFiles();
+              boolean deleteEntry(Entry entry);
+              void addEntry;
+              Entry getChild(String component);
+
+FileSystem: 
+     Fields: private final Directory root;
+     Methods: constructor;
+              private List<Entry> resolve(String path);
+              public void mkdir(String path);
+              public void createFile(String path);
+              public void delete(String path);
+              public List<Entry> list(String path);
+              public int count();
+
+Finally, we have test class.
+
+Note: when do the delete opration, we cannot delete it right away when iterating the directory.
+      and to compare the object, we need to use .equals() method.            
