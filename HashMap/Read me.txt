@@ -1,0 +1,45 @@
+Map Interface will define some methods, but don't have the inplementation:
+int size()
+boolean isEmpty() 
+void clear
+boolean containsValue(V value)
+boolean containsKey(K key)
+V get(K key)
+V put(K key, V value)               
+V remove(K key) 
+Set<Node<K, V>> entrySet();
+
+HashMap Class should have the following fields, constructors, and APIs
+Fields:
+int DEFAULT_CAPACITY
+float DEFAULT_LOAD_FACTOR
+float SCALE_FACTOR
+Node<K, V>[] array    ------   so we create a nested class Node<K, V> { }
+int size
+flot loadFactor
+
+Constructors:
+default constructor with no parameter, and initialize with default value;
+constructor with capacity and loadFactor parameter that user can provide;
+
+APIs:
+int size(): return the int value of how many pairs are actually stored in the HashMap;
+boolean isEmpty() : if size == 0, return true, otherwise, return false;
+void clear: clear all the paris in the map, set size = 0;
+boolean containsValue(V value): return true if value exists, otherwise, return false;
+boolean containsKey(K key): return true if key exists, otherwise, return false;
+V get(K key) : return the key's value, if the key not exist, return null;
+V put(K key, V value): return the old value if the key already exists, if the key not exists, return null;
+                       if need rehashing, rehashing: calculate the new index for every node, and put them
+                       in the new array correctly;
+V remove(K key): if the key exists, remove it, and return the value, if not exist, return null;
+Set<Node<K, V>> entrySet(): it will return all the key value paires in the map, it the size = 0, then it's empty;
+                            
+The main points of HashMap are:
+1. get the hashcode for every input key;
+2. get the index, find the head of a LinkedList;
+3. traverse the LinkedList, check if this node exists or not, then do the post processing.
+Because the key and value are objects, so when to compare if they're equal or not, we need to use the .equals()
+method to check the value of the two objects, not the reference. Because we use the .equals() method, so we need
+also to be careful with the NPE.
+
