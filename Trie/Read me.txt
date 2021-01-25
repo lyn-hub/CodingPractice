@@ -1,0 +1,14 @@
+implement a Trie:
+
+Field: TrieNode root
+
+Nested class: TrieNode
+
+	Fields: char c; Map<Character, TrieNode> children; boolean isWord; int count;
+	Constructor: TrieNode(char c)
+		
+Method: boolean search(String word)
+        boolean insert(String word)
+        boolean delete(String word)
+
+Test:  Junit to test the 3 methods
