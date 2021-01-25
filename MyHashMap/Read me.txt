@@ -1,0 +1,19 @@
+Basically, the thread - safe HashMap has the same properties and methods with the regular HashMap.
+
+But, the thread - safe HashMap needs to consider the possible date - race situations: when two operations, 
+running in different threads, but acting on the same memory location.
+
+For instance, when one thread run the map.put() method, and another thread run the map.get(size) method, 
+then it will introduce data race and lead to unpredictable result.
+
+In general, to form a data race, there should be 3 factors:
+1. More than one operations work on the same memory location
+2. At least one operation is a write
+3. At least two of those operations are concurrent
+
+So, in the thread - safe HashMap, we can use synchronized keyword on conflicting operations to avoid the data race.
+
+Because map has put method, it's a write, so we need to add the synchronized keyword for all public methods in the
+thread - safe HashMap. 
+
+Note: the private methods and the methods in the nested class don't need to be synchronized.
